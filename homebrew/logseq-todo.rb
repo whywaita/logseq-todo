@@ -1,0 +1,21 @@
+cask "logseq-todo" do
+  version "1.0.0"
+  sha256 "PLACEHOLDER_SHA256"
+
+  url "https://github.com/whywaita/logseq-todo/releases/download/v#{version}/LogseqTodo-#{version}.zip"
+  name "Logseq TODO"
+  desc "Menu bar app for Logseq TODO tasks"
+  homepage "https://github.com/whywaita/logseq-todo"
+
+  depends_on macos: ">= :sequoia"
+  depends_on arch: :arm64
+
+  app "LogseqTodo.app"
+
+  uninstall quit: "com.whywaita.logseq-todo"
+
+  zap trash: [
+    "~/Library/Preferences/com.whywaita.logseq-todo.plist",
+    "~/Library/Application Support/LogseqTodo",
+  ]
+end
