@@ -51,8 +51,8 @@ jobs:
       with:
         xcode-version: latest-stable
     
-    - name: Type check
-      run: swift build --typecheck
+    - name: Build for type checking
+      run: swift build
 
   release:
     name: Create Release Artifacts
