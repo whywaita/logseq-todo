@@ -5,9 +5,12 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
-    runs-on: macos-15
+    runs-on: macos-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -18,50 +21,63 @@ jobs:
         xcode-version: latest-stable
     
     - name: Build application
-      run: |
-        swift build -c release --arch arm64
-        mkdir -p build/LogseqTodo.app/Contents/MacOS
-        mkdir -p build/LogseqTodo.app/Contents/Resources
-        cp .build/arm64-apple-macosx/release/LogseqTodo build/LogseqTodo.app/Contents/MacOS/
-        cp Sources/LogseqTodo/Info.plist build/LogseqTodo.app/Contents/
-        echo "APPL????" > build/LogseqTodo.app/Contents/PkgInfo
+      run: make app
     
     - name: Create ZIP archive
       run: |
         cd build
-        zip -r LogseqTodo-${GITHUB_REF_NAME#v}.zip LogseqTodo.app
+        VERSION=${GITHUB_REF_NAME#v}
+        zip -r LogseqTodo-${VERSION}.zip LogseqTodo.app
+        shasum -a 256 LogseqTodo-${VERSION}.zip > LogseqTodo-${VERSION}.zip.sha256
         cd ..
     
-    - name: Generate SHA256
-      id: sha256
-      run: |
-        SHA=$(shasum -a 256 build/LogseqTodo-${GITHUB_REF_NAME#v}.zip | awk '{print $1}')
-        echo "sha256=$SHA" >> $GITHUB_OUTPUT
-        echo "SHA256: $SHA"
+    - name: Create DMG
+      run: make dmg
     
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Generate release notes
+      id: release_notes
+      run: |
+        VERSION=${GITHUB_REF_NAME#v}
+        SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
+        cat << EOF > release_notes.md
+        ## 📦 Downloads
+        
+        - **LogseqTodo-${VERSION}.zip** - App bundle for macOS
+        - **LogseqTodo-${VERSION}.dmg** - DMG installer for macOS
+        
+        ## 🔒 SHA256 Checksums
+        
+        \`\`\`
+        $(cat build/LogseqTodo-${VERSION}.zip.sha256)
+        \`\`\`
+        
+        ## 📋 Requirements
+        
+        - macOS 15.0 (Sequoia) or later
+        - Apple Silicon (M1/M2/M3) Mac
+        
+        ## 🚀 Installation
+        
+        ### Using ZIP:
+        1. Download \`LogseqTodo-${VERSION}.zip\`
+        2. Extract the ZIP file
+        3. Move \`LogseqTodo.app\` to your Applications folder
+        4. Right-click and select "Open" on first launch
+        
+        ### Using DMG:
+        1. Download \`LogseqTodo-${VERSION}.dmg\`
+        2. Open the DMG file
+        3. Drag LogseqTodo to your Applications folder
+        EOF
+    
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          ## Changes
-          - Initial release
-          
-          ## SHA256
-          `${{ steps.sha256.outputs.sha256 }}`
+        files: |
+          build/LogseqTodo-*.zip
+          build/LogseqTodo-*.zip.sha256
+          build/LogseqTodo-*.dmg
+        body_path: release_notes.md
         draft: false
         prerelease: false
-    
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./build/LogseqTodo-${{ github.ref_name }}.zip
-        asset_name: LogseqTodo-${{ github.ref_name }}.zip
-        asset_content_type: application/zip
+        generate_release_notes: true
