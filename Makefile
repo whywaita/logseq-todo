@@ -2,7 +2,7 @@
 
 APP_NAME = LogseqTodo
 BUNDLE_ID = com.whywaita.logseq-todo
-VERSION = 1.0.0
+VERSION = $(shell cat version.txt)
 
 build:
 	swift build -c release --arch arm64
@@ -12,7 +12,10 @@ app: build
 	mkdir -p build/$(APP_NAME).app/Contents/Resources
 	cp .build/arm64-apple-macosx/release/$(APP_NAME) build/$(APP_NAME).app/Contents/MacOS/
 	chmod +x build/$(APP_NAME).app/Contents/MacOS/$(APP_NAME)
-	cp Sources/LogseqTodo/Info.plist build/$(APP_NAME).app/Contents/
+	sed -e 's|<string>1.0</string>|<string>$(VERSION)</string>|' \
+	    -e 's|<string>1</string>|<string>$(VERSION)</string>|' \
+	    Sources/LogseqTodo/Info.plist > build/$(APP_NAME).app/Contents/Info.plist
+	cp version.txt build/$(APP_NAME).app/Contents/Resources/
 	echo "APPL????" > build/$(APP_NAME).app/Contents/PkgInfo
 	codesign --force --deep --sign - build/$(APP_NAME).app
 
