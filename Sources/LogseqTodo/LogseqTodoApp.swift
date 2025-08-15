@@ -108,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func showAbout() {
         let alert = NSAlert()
         alert.messageText = "Logseq TODO"
-        alert.informativeText = "Version 1.0.0\n\nA menu bar app for viewing Logseq TODO tasks\n\n© 2025 whywaita"
+        alert.informativeText = "Version \(Version.current)\n\nA menu bar app for viewing Logseq TODO tasks\n\n© 2025 whywaita"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         alert.runModal()
