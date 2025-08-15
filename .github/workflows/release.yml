@@ -81,3 +81,22 @@ jobs:
         draft: false
         prerelease: false
         generate_release_notes: true
+    
+    - name: Update Homebrew Cask
+      run: |
+        # Configure git
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Update cask file
+        VERSION=${GITHUB_REF_NAME#v}
+        SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
+        
+        sed -e "s/{{VERSION}}/${VERSION}/g" \
+            -e "s/{{SHA256}}/${SHA256}/g" \
+            homebrew/logseq-todo.rb.template > homebrew/logseq-todo.rb
+        
+        # Commit and push changes
+        git add homebrew/logseq-todo.rb
+        git commit -m "Update Homebrew cask to version ${VERSION}" || echo "No changes to commit"
+        git push origin HEAD:main || echo "Failed to push (might be no changes)"
