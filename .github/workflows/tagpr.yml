@@ -91,6 +91,7 @@ jobs:
         draft: false
         prerelease: false
         generate_release_notes: true
+        tag_name: ${{ needs.tagpr.outputs.tagpr-tag }}
     - name: Update Homebrew Cask
       run: |
         # Configure git
