@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.4](https://github.com/whywaita/logseq-todo/compare/v0.1.3...v0.1.4) - 2025-08-26
+- Set tag_name by @whywaita in https://github.com/whywaita/logseq-todo/pull/14
+
 ## [v0.1.3](https://github.com/whywaita/logseq-todo/compare/v0.1.2...v0.1.3) - 2025-08-26
 - Disable to create releases in tagpr by @whywaita in https://github.com/whywaita/logseq-todo/pull/12
 
