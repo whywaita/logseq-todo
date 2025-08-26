@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.2](https://github.com/whywaita/logseq-todo/compare/v0.1.1...v0.1.2) - 2025-08-26
+- Fix a outputs by @whywaita in https://github.com/whywaita/logseq-todo/pull/10
+
 ## [v0.1.1](https://github.com/whywaita/logseq-todo/compare/v0.1.0...v0.1.1) - 2025-08-26
 - Move releases task to tagpr.yml by @whywaita in https://github.com/whywaita/logseq-todo/pull/8
 
