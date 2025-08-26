@@ -24,8 +24,6 @@ jobs:
   release:
     needs: tagpr
     if: needs.tagpr.outputs.tagpr-tag != ''
-    env:
-      GITHUB_REF_NAME: ${{ needs.tagpr.outputs.tagpr-tag }}
     runs-on: macos-latest
     permissions:
       contents: write
@@ -41,7 +39,8 @@ jobs:
     - name: Create ZIP archive
       run: |
         cd build
-        VERSION=${GITHUB_REF_NAME#v}
+        VERSION=${{ needs.tagpr.outputs.tagpr-tag }}
+        VERSION=${VERSION#v}
         zip -r LogseqTodo-${VERSION}.zip LogseqTodo.app
         shasum -a 256 LogseqTodo-${VERSION}.zip > LogseqTodo-${VERSION}.zip.sha256
         cd ..
@@ -50,7 +49,8 @@ jobs:
     - name: Generate release notes
       id: release_notes
       run: |
-        VERSION=${GITHUB_REF_NAME#v}
+        VERSION=${{ needs.tagpr.outputs.tagpr-tag }}
+        VERSION=${VERSION#v}
         SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
         cat << EOF > release_notes.md
         ## 📦 Downloads
@@ -102,7 +102,8 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # Update cask file
-        VERSION=${GITHUB_REF_NAME#v}
+        VERSION=${{ needs.tagpr.outputs.tagpr-tag }}
+        VERSION=${VERSION#v}
         SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
 
         sed -e "s/{{VERSION}}/${VERSION}/g" \
