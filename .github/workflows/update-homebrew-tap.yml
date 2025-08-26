@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout homebrew-tap repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: whywaita/homebrew-tap
           token: ${{ secrets.GITHUB_TOKEN }}
           path: homebrew-tap
       
       - name: Checkout main repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: logseq-todo
       
