@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.9](https://github.com/whywaita/logseq-todo/compare/v0.1.8...v0.1.9) - 2025-08-26
+- Modify a bundle ID by @whywaita in https://github.com/whywaita/logseq-todo/pull/25
+
 ## [v0.1.8](https://github.com/whywaita/logseq-todo/compare/v0.1.7...v0.1.8) - 2025-08-26
 - pinact run by @whywaita in https://github.com/whywaita/logseq-todo/pull/23
 
