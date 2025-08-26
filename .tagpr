@@ -6,5 +6,4 @@
 	vPrefix = true
 	releaseBranch = main
 	versionFile = version.txt
-	release = true
-	changelog = true
+	release = false
