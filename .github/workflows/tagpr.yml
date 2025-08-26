@@ -35,7 +35,7 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
-    - runs: brew install create-dmg
+    - run: brew install create-dmg
     - name: Build application
       run: make app
     - name: Create ZIP archive
