@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.6](https://github.com/whywaita/logseq-todo/compare/v0.1.5...v0.1.6) - 2025-08-26
+- Fix a version by @whywaita in https://github.com/whywaita/logseq-todo/pull/19
+
 ## [v0.1.5](https://github.com/whywaita/logseq-todo/compare/v0.1.4...v0.1.5) - 2025-08-26
 - Do create-dmg by @whywaita in https://github.com/whywaita/logseq-todo/pull/16
 - fix a run by @whywaita in https://github.com/whywaita/logseq-todo/pull/17
