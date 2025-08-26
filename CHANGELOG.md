@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.3](https://github.com/whywaita/logseq-todo/compare/v0.1.2...v0.1.3) - 2025-08-26
+- Disable to create releases in tagpr by @whywaita in https://github.com/whywaita/logseq-todo/pull/12
+
 ## [v0.1.2](https://github.com/whywaita/logseq-todo/compare/v0.1.1...v0.1.2) - 2025-08-26
 - Fix a outputs by @whywaita in https://github.com/whywaita/logseq-todo/pull/10
 
