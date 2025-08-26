@@ -6,6 +6,8 @@ on:
 jobs:
   tagpr:
     runs-on: ubuntu-latest
+    outputs:
+      tagpr-tag: ${{ steps.run-tagpr.outputs.tag }}
     permissions:
       contents: write
       pull-requests: write
@@ -15,6 +17,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - uses: Songmu/tagpr@v1
+      id: run-tagpr
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
