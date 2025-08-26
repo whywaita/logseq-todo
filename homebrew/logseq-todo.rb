@@ -1,6 +1,6 @@
 cask "logseq-todo" do
   version "main"
-  sha256 "e9fee201b20ab820b0768c37edfad51c5b2f6a00512078c2afd2b3783a24aac8"
+  sha256 "28ccd3b4df5ee345e63c9774b3b1f1f246ca3fa28275292edab161eb451bd109"
 
   url "https://github.com/whywaita/logseq-todo/releases/download/v#{version}/LogseqTodo-#{version}.zip"
   name "Logseq TODO"
