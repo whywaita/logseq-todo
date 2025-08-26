@@ -16,6 +16,7 @@ app: build
 	    -e 's|<string>1</string>|<string>$(VERSION)</string>|' \
 	    Sources/LogseqTodo/Info.plist > build/$(APP_NAME).app/Contents/Info.plist
 	cp version.txt build/$(APP_NAME).app/Contents/Resources/
+	xcrun actool Assets.xcassets --compile build/$(APP_NAME).app/Contents/Resources --platform macosx --minimum-deployment-target 15.0 --app-icon AppIcon --output-partial-info-plist /tmp/partial-info.plist
 	echo "APPL????" > build/$(APP_NAME).app/Contents/PkgInfo
 	codesign --force --deep --sign - build/$(APP_NAME).app
 
