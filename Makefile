@@ -1,7 +1,7 @@
 .PHONY: build clean test release
 
 APP_NAME = LogseqTodo
-BUNDLE_ID = com.whywaita.logseq-todo
+BUNDLE_ID = it.whywrite.logseq-todo
 VERSION = $(shell cat version.txt)
 
 build:

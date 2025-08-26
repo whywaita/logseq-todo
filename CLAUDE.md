@@ -93,7 +93,7 @@ platforms: [.macOS(.v15)]
 #### Info.plist Key Settings
 - `LSUIElement`: true (menu bar only app)
 - `CFBundleIconFile`: AppIcon
-- Bundle ID: com.whywaita.logseq-todo
+- Bundle ID: it.whywrite.logseq-todo
 
 ### Assets Structure
 ```

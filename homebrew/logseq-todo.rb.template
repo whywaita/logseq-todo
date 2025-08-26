@@ -12,10 +12,10 @@ cask "logseq-todo" do
 
   app "LogseqTodo.app"
 
-  uninstall quit: "com.whywaita.logseq-todo"
+  uninstall quit: "it.whywrite.logseq-todo"
 
   zap trash: [
-    "~/Library/Preferences/com.whywaita.logseq-todo.plist",
+    "~/Library/Preferences/it.whywrite.logseq-todo.plist",
     "~/Library/Application Support/LogseqTodo",
   ]
 end
