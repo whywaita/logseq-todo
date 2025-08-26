@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.7](https://github.com/whywaita/logseq-todo/compare/v0.1.6...v0.1.7) - 2025-08-26
+- Apply logo image by @whywaita in https://github.com/whywaita/logseq-todo/pull/21
+
 ## [v0.1.6](https://github.com/whywaita/logseq-todo/compare/v0.1.5...v0.1.6) - 2025-08-26
 - Fix a version by @whywaita in https://github.com/whywaita/logseq-todo/pull/19
 
