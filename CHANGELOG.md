@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.1](https://github.com/whywaita/logseq-todo/compare/v0.1.0...v0.1.1) - 2025-08-26
+- Move releases task to tagpr.yml by @whywaita in https://github.com/whywaita/logseq-todo/pull/8
+
 ## [v0.1.0](https://github.com/whywaita/logseq-todo/compare/v0.0.2...v0.1.0) - 2025-08-15
 - chore(deps): bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/2
 - Improve a release workflow by @whywaita in https://github.com/whywaita/logseq-todo/pull/4
