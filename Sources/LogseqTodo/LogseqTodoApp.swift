@@ -111,6 +111,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.informativeText = "Version \(Version.current)\n\nA menu bar app for viewing Logseq TODO tasks\n\n© 2025 whywaita"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
+        
+        // Set the app icon
+        if let appIcon = NSImage(named: "AppIcon") {
+            alert.icon = appIcon
+        }
+        
         alert.runModal()
     }
     
