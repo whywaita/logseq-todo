@@ -17,3 +17,96 @@ jobs:
     - uses: Songmu/tagpr@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs: tagpr
+    if: needs.tagpr.outputs.tagpr-tag != ''
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v5
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Build application
+      run: make app
+    - name: Create ZIP archive
+      run: |
+        cd build
+        VERSION=${GITHUB_REF_NAME#v}
+        zip -r LogseqTodo-${VERSION}.zip LogseqTodo.app
+        shasum -a 256 LogseqTodo-${VERSION}.zip > LogseqTodo-${VERSION}.zip.sha256
+        cd ..
+    - name: Create DMG
+      run: make dmg
+    - name: Generate release notes
+      id: release_notes
+      run: |
+        VERSION=${GITHUB_REF_NAME#v}
+        SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
+        cat << EOF > release_notes.md
+        ## 📦 Downloads
+
+        - **LogseqTodo-${VERSION}.zip** - App bundle for macOS
+        - **LogseqTodo-${VERSION}.dmg** - DMG installer for macOS
+
+        ## 🔒 SHA256 Checksums
+
+        \`\`\`
+        $(cat build/LogseqTodo-${VERSION}.zip.sha256)
+        \`\`\`
+
+        ## 📋 Requirements
+
+        - macOS 15.0 (Sequoia) or later
+        - Apple Silicon (M1/M2/M3) Mac
+
+        ## 🚀 Installation
+
+        ### Using ZIP:
+        1. Download \`LogseqTodo-${VERSION}.zip\`
+        2. Extract the ZIP file
+        3. Move \`LogseqTodo.app\` to your Applications folder
+        4. Right-click and select "Open" on first launch
+
+        ### Using DMG:
+        1. Download \`LogseqTodo-${VERSION}.dmg\`
+        2. Open the DMG file
+        3. Drag LogseqTodo to your Applications folder
+        EOF
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          build/LogseqTodo-*.zip
+          build/LogseqTodo-*.zip.sha256
+          build/LogseqTodo-*.dmg
+        body_path: release_notes.md
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+    - name: Update Homebrew Cask
+      run: |
+        # Configure git
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Update cask file
+        VERSION=${GITHUB_REF_NAME#v}
+        SHA256=$(cat build/LogseqTodo-${VERSION}.zip.sha256 | awk '{print $1}')
+
+        sed -e "s/{{VERSION}}/${VERSION}/g" \
+            -e "s/{{SHA256}}/${SHA256}/g" \
+            homebrew/logseq-todo.rb.template > homebrew/logseq-todo.rb
+
+        # Commit and push changes only if there are changes
+        if ! git diff --quiet -- homebrew/logseq-todo.rb; then
+          git add homebrew/logseq-todo.rb
+          git commit -m "Update Homebrew cask to version ${VERSION}"
+          git push origin HEAD:main
+        else
+          echo "No changes to commit or push."
+        fi
