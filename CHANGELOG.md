@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.10](https://github.com/whywaita/logseq-todo/compare/v0.1.9...v0.1.10) - 2025-09-04
+- chore(deps): bump actions/checkout from 4.3.0 to 5.0.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/27
+
 ## [v0.1.9](https://github.com/whywaita/logseq-todo/compare/v0.1.8...v0.1.9) - 2025-08-26
 - Modify a bundle ID by @whywaita in https://github.com/whywaita/logseq-todo/pull/25
 
