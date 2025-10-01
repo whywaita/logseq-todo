@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.11](https://github.com/whywaita/logseq-todo/compare/v0.1.10...v0.1.11) - 2025-10-01
+- chore(deps): bump Songmu/tagpr from 1.7.0 to 1.9.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/31
+- chore(deps): bump softprops/action-gh-release from 2.3.2 to 2.3.3 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/29
+
 ## [v0.1.10](https://github.com/whywaita/logseq-todo/compare/v0.1.9...v0.1.10) - 2025-09-04
 - chore(deps): bump actions/checkout from 4.3.0 to 5.0.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/27
 
