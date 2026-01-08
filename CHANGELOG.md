@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.1.12](https://github.com/whywaita/logseq-todo/compare/v0.1.11...v0.1.12) - 2026-01-08
+- chore(deps): bump actions/checkout from 5.0.0 to 6.0.1 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/38
+- chore(deps): bump actions/upload-artifact from 4.6.2 to 6.0.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/40
+- chore(deps): bump softprops/action-gh-release from 2.3.3 to 2.5.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/39
+- chore(deps): bump Songmu/tagpr from 1.9.0 to 1.10.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/41
+
 ## [v0.1.11](https://github.com/whywaita/logseq-todo/compare/v0.1.10...v0.1.11) - 2025-10-01
 - chore(deps): bump Songmu/tagpr from 1.7.0 to 1.9.0 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/31
 - chore(deps): bump softprops/action-gh-release from 2.3.2 to 2.3.3 by @dependabot[bot] in https://github.com/whywaita/logseq-todo/pull/29
