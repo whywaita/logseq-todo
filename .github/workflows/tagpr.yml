@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-    - uses: Songmu/tagpr@75738aa2880a03a1036bc5bd90ef49853427ec65 # v1.10.0
+    - uses: Songmu/tagpr@da82ed6743aec90049892070edd5561335904a9e # v1.17.0
       id: run-tagpr
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
